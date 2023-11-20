@@ -1,7 +1,7 @@
 
 <div align="center">
 
-  <h1><b>Test-Driven-Developemt</b></h1>
+  <h1><b>Ruby-Group-Capstone</b></h1>
 
 </div>
 
@@ -9,7 +9,7 @@
 
 ## 📗 Table of Contents
 
-- [📖 Test-Driven-Developemt ](#-test-driven-developemt-)
+- [📖 Ruby-Group-Capstone ](#-Ruby-Group-Capstone-)
   - [🛠 Built With ](#-built-with-)
     - [Tech Stack ](#tech-stack-)
     - [Key Features ](#key-features-)
@@ -26,9 +26,9 @@
 
 <!-- PROJECT DESCRIPTION -->
 
-# 📖 Test-Driven-Developemt <a name="about-project"></a>
+# 📖Ruby-Group-Capstone <a name="about-project"></a>
 
-**Test-Driven-Developemt** is a comprehensive application built while writing tests first then code.
+**Ruby-Group-Capstone** is a console app that will help you to keep a record of different types of things you own: books, music albums, movies, and games. Everything will be based on the UML class diagram
 
 ## 🛠 Built With <a name="built-with"></a>
 
@@ -68,7 +68,7 @@ In order to run this project you need:
 Clone this repository to your desired folder:
 
 ```bash
-  git clone https://github.com/Chimoneg27/School-Library.git
+  git clone https://github.com/bhushan354/Ruby-Group-Capstone.git
 ```
 
 ### Install
@@ -76,7 +76,7 @@ Clone this repository to your desired folder:
 Install this project with:
 
 ```bash
-  cd school-library
+  cd Ruby-Group-Capstone
   bundle install
 ```
 
