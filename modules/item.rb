@@ -5,6 +5,8 @@ class Item
   attr_reader :id, :archived
 
   def initialize(id = Random.rand(1..1000), publish_date = DateTime.now, archived: false)
+    raise ArgumentError, 'publish_date must be a Date' unless publish_date.is_a?(Date)
+
     @id = id
     @archived = archived
     @publish_date = publish_date
@@ -15,7 +17,7 @@ class Item
   end
 
   def can_be_archived?
-    @publish_date && (@publish_date > (Date.today - (365 * 10)))
+    @publish_date && (@publish_date > (DateTime.now - (365 * 10)))
   end
 
   def move_to_archive
