@@ -21,18 +21,3 @@ class Genre
     Random.rand(1..1000)
   end
 end
-
-# Example usage
-
-# Creating a genre
-rock_genre = Genre.new('Rock')
-
-# Creating an item
-item = Item.new(Time.new(2010, 1, 1))
-
-# Adding the item to the genre
-rock_genre.add_item(item)
-
-# Checking the association
-puts item.genre.name # Output: Rock
-puts rock_genre.items # Output: [item]
