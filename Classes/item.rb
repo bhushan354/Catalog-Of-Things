@@ -16,8 +16,13 @@ class Item
 
   def move_to_archive
     result = can_be_archived?
-    @archived = true if result
-    nil
+    if result
+      @archived = true
+      puts 'Item archived successfully.'
+    else
+      puts 'Item cannot be archived.'
+    end
+    result
   end
 
   private
