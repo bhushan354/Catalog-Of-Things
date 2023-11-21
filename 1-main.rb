@@ -33,7 +33,6 @@ loop do
   else
     puts 'Invalid choice. Please try again.'
   end
-
 rescue Interrupt
   puts EXIT_MESSAGE
   break
