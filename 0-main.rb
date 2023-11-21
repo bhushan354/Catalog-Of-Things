@@ -1,7 +1,7 @@
 #!/usr/bin/ruby -w
 
-require_relative 'modules/game'
-require_relative 'modules/author'
+require_relative 'Classes/game'
+require_relative 'Classes/author'
 
 author = Author.new('Stanley', 'Osagie')
 
@@ -40,3 +40,5 @@ puts "Game1 archived? #{game1.archived ? 'Yes' : 'No'}"
 game2.move_to_archive
 puts "\nMoving game2 to archive..."
 puts "Game2 archived? #{game2.archived ? 'Yes' : 'No'}"
+
+puts game1.class.name
