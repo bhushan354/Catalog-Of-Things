@@ -1,4 +1,4 @@
-require_relative './app'
+require_relative 'classes/app'
 
 class Menu
   def display_option
