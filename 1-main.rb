@@ -15,19 +15,19 @@ loop do
   puts '0. Quit'
 
   print '>> '
-  choice = gets.chomp.to_i
+  choice = gets.chomp.strip
   puts "\n"
 
   case choice
-  when 1
+  when '1'
     app.list_authors
-  when 2
+  when '2'
     app.list_items
-  when 3
+  when '3'
     app.create_item
-  when 4
+  when '4'
     app.create_author
-  when 0
+  when '0'
     puts EXIT_MESSAGE
     break
   else
