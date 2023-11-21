@@ -24,16 +24,18 @@ class Main
   def initialize(app)
     @app = app
   end
+  # rubocop:disable Metrics/CyclomaticComplexity
 
   def run
     main_menu = Menu.new
-
     loop do
       main_menu.display_option
       choice = main_menu.choice
 
       case choice
-      # hello teammates as this is group task this 1)display_option_books and 4)create_book these are my methods and I have given random method name to your methods eg 3)display_option_games for the sake of this file to run in terminal you can edit the names of your method
+      # hello teammates as this is group task this 1)display_option_books and 4)create_book these are my methods
+      # and I have given random method name to your methods
+      # eg 3)display_option_games for the sake of this file to run in terminal you can edit the names of your method
       when '1' then @app.display_option_books
 
       when '2' then @app.display_option_musicAlbums
@@ -49,6 +51,7 @@ class Main
       end
     end
   end
+  # rubocop:enable Metrics/CyclomaticComplexity
 end
 
 main = Main.new(App.new)
