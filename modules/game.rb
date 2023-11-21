@@ -1,13 +1,14 @@
 require 'date'
-require_relative 'Item'
+require_relative 'item'
 
 class Game < Item
   attr_accessor :multiplayer, :last_played_at
 
-  def initialize(last_played_at: nil, multiplayer: false, id: nil, publish_date: nil, archived: false)
-    super(id, publish_date, archived)
+  def initialize(last_played_at: nil, multiplayer: false, id: Random.rand(1..1000), publish_date: nil, archived: false)
+    super(id, publish_date, archived: archived)
 
-    raise ArgumentError, 'multiplayer must be a Boolean' unless multiplayer.is_a?(Boolean)
+    raise ArgumentError, 'last_played_at must be a Date or nil' unless last_played_at.is_a?(Date)
+    raise ArgumentError, 'multiplayer must be a Boolean' unless [true, false].include?(multiplayer)
 
     @multiplayer = multiplayer
     @last_played_at = last_played_at
@@ -17,8 +18,7 @@ class Game < Item
     return false if @last_played_at.nil?
 
     current_date = Date.today
-    last_played_date = Date.parse(@last_played_at)
 
-    super && (last_played_date < current_date - (365 * 2))
+    super && (last_played_at < (current_date - (365 * 2)))
   end
 end

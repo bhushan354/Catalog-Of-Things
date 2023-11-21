@@ -15,10 +15,10 @@ class Item
   end
 
   def can_be_archived?
-    publish_date && publish_date < (Date.today - (365 * 10))
+    @publish_date && (@publish_date > (Date.today - (365 * 10)))
   end
 
   def move_to_archive
-    @archived = can_be_archived?
+    @archived = true unless can_be_archived?
   end
 end
