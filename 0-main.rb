@@ -4,6 +4,7 @@ require_relative 'Classes/game'
 require_relative 'Classes/author'
 
 author = Author.new('Stanley', 'Osagie')
+author2 = Author.new('Stanley2', 'Osagie2')
 
 game1 = Game.new(
   last_played_at: DateTime.new(2010, 1, 1),
@@ -14,11 +15,15 @@ game1 = Game.new(
 game2 = Game.new(
   last_played_at: DateTime.new(2023, 1, 1),
   multiplayer: true,
-  publish_date: DateTime.new(2023, 1, 1)
+  publish_date: DateTime.new(2023, 1, 1),
+  author: author2
 )
-
-author.add_item(game1)
-author.add_item(game2)
+puts '...................................................'
+puts game2.author.first_name
+game2.author = author
+game1.author = author
+puts game2.author.first_name
+puts game2.author.id
 
 puts "Author: #{author.first_name} #{author.last_name}, ID: #{author.id}"
 puts "Items by #{author.first_name}:"
@@ -48,3 +53,7 @@ game1.author = author
 puts author.items[0].publish_date
 puts game1.author.first_name
 puts game1.id
+
+puts game2.author.first_name
+game2.author = author
+puts game2.author.first_name

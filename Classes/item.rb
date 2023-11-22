@@ -1,14 +1,14 @@
 require 'date'
 
 class Item
-  attr_accessor :genre, :source, :label, :publish_date
-  attr_reader :id, :archived, :author
+  attr_accessor :publish_date
+  attr_reader :id, :archived, :author, :genre, :source, :label
 
-  def initialize(id = Random.rand(1..1000), publish_date = Date.today, archived: false)
+  def initialize(id = Random.rand(1..1000), publish_date = Date.today)
     raise ArgumentError, 'publish_date must be a Date' unless publish_date.is_a?(Date)
 
     @id = id
-    @archived = archived
+    @archived = false
     @publish_date = publish_date
     @genre = nil
     @author = nil
@@ -28,6 +28,27 @@ class Item
 
   def author=(author)
     @author = author
-    author.items.push(self) unless author.items.include?(self)
+    associate_with_items(author)
+  end
+
+  def genre=(genre)
+    @genre = genre
+    associate_with_items(genre)
+  end
+
+  def source=(source)
+    @source = source
+    associate_with_items(source)
+  end
+
+  def label=(label)
+    @label = label
+    associate_with_items(label)
+  end
+
+  private
+
+  def associate_with_items(association)
+    association.items << self unless association.items.include?(self)
   end
 end

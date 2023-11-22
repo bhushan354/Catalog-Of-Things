@@ -34,7 +34,7 @@ class App
     else
       puts "\nList of Items:"
       @items.each_with_index do |item, i|
-        author_first_name = item.author ? " Author: \"#{item.author.first_name} #{item.author.last_name}\" " : nil
+        author_first_name = item&.author ? " Author: \"#{item.author.first_name} #{item.author.last_name}\" " : nil
         puts "  #{i} | [#{item.class.name}] -#{author_first_name}Publish Date: #{item.publish_date}. id: #{item.id}"
       end
       puts ''

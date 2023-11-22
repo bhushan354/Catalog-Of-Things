@@ -1,6 +1,6 @@
 require_relative 'utils/util'
 require_relative 'author'
-require_relative 'preserve_data'
+require_relative 'preserve_author_data'
 
 class AuthorService
   attr_reader :authors
