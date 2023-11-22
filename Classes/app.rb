@@ -32,9 +32,8 @@ class App
     else
       puts "\nList of Items:"
       @items.each_with_index do |item, i|
-        author_first_name = item.author.first_name && ''
-        puts "  #{i} | [#{item.class.name}] - Author: #{author_first_name} "
-        print "Publish Date: #{item.publish_date}. id: #{item.id}"
+        author_first_name = item.author ? " Author: \"#{item.author.first_name} #{item.author.last_name}\" " : nil
+        puts "  #{i} | [#{item.class.name}] -#{author_first_name}Publish Date: #{item.publish_date}. id: #{item.id}"
       end
       puts ''
     end
@@ -67,9 +66,9 @@ class App
   def create_game
     return unless @author_manager.check_and_create_author
 
+    publish_date = get_date_input('Publish date')
     last_played_at = get_date_input('Last played date')
     multiplayer = get_boolean_input('Is it multiplayer?')
-    publish_date = get_date_input('Publish date')
 
     loop do
       list_authors

@@ -42,3 +42,8 @@ puts "\nMoving game2 to archive..."
 puts "Game2 archived? #{game2.archived ? 'Yes' : 'No'}"
 
 puts game1.class.name
+
+game1.author = author
+
+puts author.items[0].publish_date
+puts game1.author.first_name
