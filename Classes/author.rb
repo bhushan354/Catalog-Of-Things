@@ -8,8 +8,8 @@ class Author
     validate_names(first_name, last_name)
     raise ArgumentError, 'id must be an integer' unless id.is_a?(Integer)
 
-    @first_name = first_name
-    @last_name = last_name
+    @first_name = first_name.slice(0, 20).split.first
+    @last_name = last_name.slice(0, 20).split.first
     @id = id
     @items = []
   end

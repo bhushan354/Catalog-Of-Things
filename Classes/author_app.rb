@@ -1,11 +1,12 @@
 require_relative 'utils/util'
 require_relative 'author'
+require_relative 'preserve_data'
 
 class AuthorApp
   attr_reader :authors
 
   def initialize
-    @authors = []
+    @authors = PreserveData.load_authors
   end
 
   def create_author
@@ -14,6 +15,7 @@ class AuthorApp
 
     author = Author.new(first_name, last_name)
     @authors << author
+    PreserveData.save_authors(@authors)
 
     puts "Author #{author.first_name}#{author.id} created successfully!"
     author
@@ -23,9 +25,9 @@ class AuthorApp
     if @authors.empty?
       check_and_create_author
     else
-      puts "\nList of Authors:"
+      puts 'List of Authors:'
       @authors.each_with_index do |author, i|
-        puts "  #{i} | Name: #{author.first_name} #{author.last_name}. id:#{author.id}"
+        puts "  #{i} | Name: \"#{author.first_name} #{author.last_name}\". id:#{author.id}"
       end
       puts ''
     end
