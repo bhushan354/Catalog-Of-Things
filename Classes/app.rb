@@ -63,14 +63,12 @@ class App
   end
 
   def write_to_file(data, file_path)
-    begin
-      File.open(file_path, 'w') do |file|
-        file.puts(JSON.generate(data))
-      end
-      puts "File written successfully to #{file_path}"
-    rescue StandardError => e
-      puts "Error writing to file #{file_path}: #{e.message}"
+    File.open(file_path, 'w') do |file|
+      file.puts(JSON.generate(data))
     end
+    puts "File written successfully to #{file_path}"
+  rescue StandardError => e
+    puts "Error writing to file #{file_path}: #{e.message}"
   end
 
   def read_from_file(file_path)
