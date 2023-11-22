@@ -47,3 +47,4 @@ game1.author = author
 
 puts author.items[0].publish_date
 puts game1.author.first_name
+puts game1.id

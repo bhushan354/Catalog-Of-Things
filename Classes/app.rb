@@ -1,7 +1,8 @@
 require 'date'
 require_relative 'game'
-require_relative 'author_app'
+require_relative 'author_service'
 require_relative 'utils/util'
+require_relative 'game_service'
 
 class App
   def initialize
@@ -10,7 +11,8 @@ class App
     # All subclass of item class (Book, MusicAlbum, Movie, and Game) should be push here
     @items = []
 
-    @author_manager = AuthorApp.new
+    @author_manager = AuthorService.new
+    @game_creator = GameService.new(@author_manager, @items)
   end
 
   def create_book
@@ -64,30 +66,7 @@ class App
   end
 
   def create_game
-    return unless @author_manager.check_and_create_author
-
-    publish_date = get_date_input('Publish date')
-    last_played_at = get_date_input('Last played date')
-    multiplayer = get_boolean_input('Is it multiplayer?')
-
-    loop do
-      list_authors
-
-      author_id = get_non_empty_input('Select Author by ID listed above').to_i
-      author = @author_manager.authors.find { |i| i.id == author_id }
-
-      if author.nil?
-        puts 'Invalid author ID. Please choose a correct author ID listed above or enter "exit" to go back to the Menu.'
-        break if get_non_empty_input('Enter your choice: ').downcase == 'exit'
-      else
-        game = Game.new(last_played_at: last_played_at, multiplayer: multiplayer,
-                        publish_date: publish_date || Date.today)
-        game.author = author
-        @items << game
-        puts 'Game added successfully!'
-        break
-      end
-    end
+    @game_creator.create_game
   end
   # you can add your required def here
 end

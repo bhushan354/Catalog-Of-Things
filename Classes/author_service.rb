@@ -2,7 +2,7 @@ require_relative 'utils/util'
 require_relative 'author'
 require_relative 'preserve_data'
 
-class AuthorApp
+class AuthorService
   attr_reader :authors
 
   def initialize
@@ -34,14 +34,13 @@ class AuthorApp
   end
 
   def check_and_create_author
-    return false unless @authors.empty?
+    return unless @authors.empty?
 
     puts 'Author is empty'
     choice = get_boolean_input('Do you want to create an author?')
     puts ''
-    return choice unless choice
+    return unless choice
 
     create_author
-    choice
   end
 end
