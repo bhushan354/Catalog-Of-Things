@@ -22,7 +22,7 @@ loop do
   when '1'
     app.list_authors
   when '2'
-    app.list_items
+    app.list_items_menu
   when '3'
     app.create_item
   when '4'

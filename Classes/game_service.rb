@@ -9,6 +9,8 @@ class GameService
     @author_manager = author_manager
     @items = items
     @games = []
+
+    load
   end
 
   def create_game
@@ -25,11 +27,11 @@ class GameService
       author = author_manager.authors.find { |a| a.id == author_id }
 
       if author
-        game = Game.new(last_played_at: last_played_at, multiplayer: multiplayer,
-                        publish_date: publish_date || Date.today, author: author)
+        game = Game.new(last_played_at: Date.parse(last_played_at), multiplayer: multiplayer,
+                        publish_date: Date.parse(publish_date) || Date.today, author: author)
         @items << game
         @games << game
-        save_games
+        save
         puts 'Game added successfully!'
         break
       end
@@ -39,20 +41,61 @@ class GameService
     end
   end
 
-  def save_games
+  def list
+    if @games.empty?
+      puts "game is empty\n\n"
+    else
+      puts "\nList of games:"
+      @games.each_with_index do |item, i|
+        author_first_name = item&.author ? " Author: \"#{item.author.first_name} #{item.author.last_name}\" " : nil
+        puts "  #{i} | #{author_first_name}Publish Date: #{item.publish_date}. id: #{item.id}"
+      end
+      puts ''
+    end
+  end
+
+  def save
     FileUtils.mkdir_p(DATA_DIR) unless File.directory?(DATA_DIR)
 
     File.open(File.join(DATA_DIR, 'games.json'), 'w') do |file|
       game_data = @games.map do |game|
         {
           id: game.id,
-          last_play_at: game.last_played_at,
+          last_played_at: game.last_played_at,
           multiplayer: game.multiplayer,
           publish_date: game.publish_date,
           author_id: game.author.id
         }
       end
       file.puts(JSON.generate(game_data))
+    end
+  end
+
+  def load
+    return [] unless File.exist?(File.join(DATA_DIR, 'games.json'))
+
+    begin
+      game_json = JSON.parse(File.read(File.join(DATA_DIR, 'games.json')))
+    rescue JSON::ParserError
+      puts 'Error parsing JSON file. Returning empty array.'
+      return []
+    end
+
+    game_json.map do |game_data|
+      id = game_data.fetch('id', -1)
+      last_played_at = game_data.fetch('last_played_at', nil)
+      multiplayer = game_data.fetch('multiplayer', false)
+      publish_date = game_data.fetch('publish_date') { Date.new(1970, 1, 1) }
+      author_id = game_data.fetch('author_id', -1)
+
+      last_played_at_obj = last_played_at ? Date.parse(last_played_at) : nil
+
+      author = author_manager.authors.find { |a| a.id == author_id }
+
+      game = Game.new(last_played_at: last_played_at_obj, multiplayer: multiplayer, id: id,
+                      publish_date: Date.parse(publish_date), author: author)
+      @games << game
+      @items << game
     end
   end
 

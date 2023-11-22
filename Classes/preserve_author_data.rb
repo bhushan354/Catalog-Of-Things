@@ -27,7 +27,12 @@ class PreserveData
   def self.load_authors
     return [] unless File.exist?(File.join(DATA_DIR, 'authors.json'))
 
-    authors_json = JSON.parse(File.read(File.join(DATA_DIR, 'authors.json')))
+    begin
+      authors_json = JSON.parse(File.read(File.join(DATA_DIR, 'authors.json')))
+    rescue JSON::ParserError
+      puts 'Error parsing JSON file. Returning empty array.'
+      return []
+    end
 
     authors_json.map do |author_data|
       first_name = author_data.fetch('fn', '_Unknown_LN')
