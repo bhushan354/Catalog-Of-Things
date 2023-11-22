@@ -1,4 +1,5 @@
 require_relative 'item'
+require 'date'
 
 class Book < Item
   attr_accessor :publisher, :cover_state, :can_be_archived

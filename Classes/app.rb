@@ -1,10 +1,13 @@
 require_relative 'book'
 require_relative 'label'
+require_relative 'author'
+require 'json'
 
 class App
   def initialize
     @books = []
     @labels = []
+    @authors = []
   end
 
   def create_book
@@ -24,13 +27,13 @@ class App
     @books << book
     instance_author.add_item(book)
     @authors << instance_author
-    write_to_file(@authors, './data/authors.json')
-    write_to_file(@books, './data/books.json')
+    write_to_file(@authors, './dataJSON/authors.json')
+    write_to_file(@books, './dataJSON/books.json')
     puts 'Book Created Successfully'
   end
 
   def display_books
-    @books = read_from_file('./data/books.json')
+    @books = read_from_file('./dataJSON/books.json')
     puts 'Book list is empty' if @books.empty?
     @books.each_with_index do |book, i|
       puts "#{i}) Publisher: #{book.publisher}, " \
@@ -47,18 +50,30 @@ class App
     color = gets.chomp.to_s
 
     @labels << Label.new(title, color)
-    puts @labels
-    write_to_file(@labels, './data/labels.json')
+    write_to_file(@labels, './dataJSON/labels.json')
     puts 'Label Created Successfully'
   end
 
   def display_labels
-    @labels = read_from_file('./data/labels.json')
+    @labels = read_from_file('./dataJSON/labels.json')
     puts 'Label list is empty' if @labels.empty?
     @labels.each_with_index do |label, i|
-      puts "#{i}) Title: #{label['title']}, Color: #{label['color']}"
+      puts "#{i}) Title: #{label.title}, Color: #{label.color}"
     end
   end
 
-  # you can add your required def here
+  def write_to_file(data, file_path)
+    begin
+      File.open(file_path, 'w') do |file|
+        file.puts(JSON.generate(data))
+      end
+      puts "File written successfully to #{file_path}"
+    rescue StandardError => e
+      puts "Error writing to file #{file_path}: #{e.message}"
+    end
+  end
+
+  def read_from_file(file_path)
+    JSON.parse(File.read(file_path))
+  end
 end
