@@ -1,8 +1,8 @@
 require 'date'
 
 class Item
-  attr_accessor :genre, :author, :source, :label, :publish_date
-  attr_reader :id, :archived
+  attr_accessor :genre, :source, :label, :publish_date
+  attr_reader :id, :archived, :author
 
   def initialize(id = Random.rand(1..1000), publish_date = Date.today, archived: false)
     raise ArgumentError, 'publish_date must be a Date' unless publish_date.is_a?(Date)
@@ -24,5 +24,10 @@ class Item
   def move_to_archive
     @archived = can_be_archived?
     @archived
+  end
+
+  def author=(author)
+    @author = author
+    author.items.push(self) unless author.items.include?(self)
   end
 end
