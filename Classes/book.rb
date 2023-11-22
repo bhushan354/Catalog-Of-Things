@@ -4,10 +4,10 @@ require 'date'
 class Book < Item
   attr_accessor :publisher, :cover_state, :can_be_archived
 
-  def initialize(publisher, cover_state, publish_date)
+  def initialize(id = Random.rand(1..1000), publisher, cover_state, publish_date: Date.today)
     @publisher = publisher
     @cover_state = cover_state
-    super(Date.parse(publish_date))
+    super(id, publish_date)
   end
 
   def can_be_archived?

@@ -22,19 +22,16 @@ class App
   end
 
   def create_book
-    print 'Date of publishing: '
-    date = gets.chomp.to_s
+    date = get_date_input('Publishing date')
 
-    print 'Publisher First Name: '
-    first_name = gets.chomp.to_s
-    print 'Publisher Last Name: '
-    last_name = gets.chomp.to_s
+    first_name = get_non_empty_input('Publisher First Name')
+    last_name = get_non_empty_input('Publisher Last Name')
     instance_author = Author.new(first_name, last_name)
     publisher = "#{first_name} #{last_name}"
-    print 'Cover state: '
-    cover = gets.chomp.to_s
+    cover = get_non_empty_input('Cover state')
 
     book = Book.new(publisher, cover, date)
+    @items << book
     @books << book
     instance_author.add_item(book)
     @authors << instance_author
@@ -54,13 +51,12 @@ class App
   end
 
   def create_label
-    print 'Title: '
-    title = gets.chomp.to_s
+    title = get_non_empty_input('Title')
 
-    print 'Color: '
-    color = gets.chomp.to_s
-
-    @labels << Label.new(title, color)
+    color = get_non_empty_input('Color')
+    label = Label.new(title, color)
+    @labels << label
+    @items << label
     write_to_file(@labels, './dataJSON/labels.json')
     puts 'Label Created Successfully'
   end
@@ -111,6 +107,8 @@ class App
     loop do
       puts 'Select choice'
       puts '  1. To create game'
+      puts '  2. To create book'
+      puts '  3. To create label'
       puts '  0. Back to menu'
       print 'Add Items >> '
       choice = gets.chomp.to_i
@@ -119,6 +117,10 @@ class App
       case choice
       when 1
         create_game
+      when 2
+        create_book
+      when 3
+        create_label
       when 0
         break
       else
