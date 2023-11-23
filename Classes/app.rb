@@ -142,7 +142,7 @@ class App
       when 3
         puts "Music-Album listing functionality is not yet implemented.\n\n"
       when 4
-        puts "Book listing functionality is not yet implemented.\n\n"
+        display_books
       when 5
         list_items
       else
