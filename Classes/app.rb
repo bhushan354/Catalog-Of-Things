@@ -9,6 +9,27 @@ require_relative 'utils/util'
 require_relative 'game_service'
 require_relative 'music_album_service'
 
+def list_menu_option_display
+  puts 'Select choice'
+  puts '  1. To list games'
+  puts '  2. To Music Album (not yet available)'
+  puts '  3. To list Music-Album (not yet available)'
+  puts '  4. To list books'
+  puts '  5. To list all items'
+  puts '  0. Back to App menu'
+  print 'List Items >> '
+  gets.chomp.to_i
+end
+
+def create_item_options
+  puts 'Select choice'
+  puts '  1. To create game'
+  puts '  2. To create book'
+  puts '  3. To create Music Album (not yet available)'
+  puts '  0. Back to App menu'
+  print 'Add Items >> '
+end
+
 class App
   def initialize
     @books = []
@@ -168,27 +189,5 @@ class App
     @music_album_creator.list_all_music_albums
   end
 
-  private
-
-  def list_menu_option_display
-    puts 'Select choice'
-    puts '  1. To list games'
-    puts '  2. To Music Album (not yet available)'
-    puts '  3. To list Music-Album (not yet available)'
-    puts '  4. To list books'
-    puts '  5. To list all items'
-    puts '  0. Back to App menu'
-    print 'List Items >> '
-    gets.chomp.to_i
-  end
-
-  def create_item_options
-    puts 'Select choice'
-    puts '  1. To create game'
-    puts '  2. To create book'
-    puts '  3. To create Music Album (not yet available)'
-    puts '  0. Back to App menu'
-    print 'Add Items >> '
-  end
   # you can add your required def here
 end
