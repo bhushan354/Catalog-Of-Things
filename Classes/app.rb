@@ -107,10 +107,8 @@ class App
 
   def create_item
     loop do
-      puts 'Select choice'
-      puts '  1. To create game'
-      puts '  0. Back to App menu'
-      print 'Add Items >> '
+      create_item_options
+
       choice = gets.chomp.to_i
       puts "\n"
 
@@ -120,7 +118,9 @@ class App
       when 2
         create_book
       when 3
-        create_label
+        puts "Creating Movie functionality is not yet implemented.\n\n"
+      when 4
+        puts "Creating Music functionality is not yet implemented.\n\n"
       when 0
         break
       else
@@ -132,6 +132,7 @@ class App
   def list_items_menu
     loop do
       list_menu_option_display
+
       choice = gets.chomp.to_i
       puts "\n"
 
@@ -139,10 +140,14 @@ class App
       when 1
         @game_creator.list
       when 2
-        puts "MusicAlbum listing functionality is not yet implemented.\n\n"
+        puts "Music listing functionality is not yet implemented.\n\n"
       when 3
-        puts "Book listing functionality is not yet implemented.\n\n"
+        puts "Music-Album listing functionality is not yet implemented.\n\n"
       when 4
+        puts "Book listing functionality is not yet implemented.\n\n"
+      when 5
+        puts "Movies listing functionality is not yet implemented.\n\n"
+      when 6
         list_items
       when 0
         break
@@ -161,11 +166,23 @@ class App
   def list_menu_option_display
     puts 'Select choice'
     puts '  1. To list games'
-    puts '  2. To list MusicAlbum (not yet available)'
-    puts '  3. To list books (not yet available)'
-    puts '  4. To list all items'
+    puts '  2. To Music Album (not yet available)'
+    puts '  3. To list Music-Album (not yet available)'
+    puts '  4. To list books'
+    puts '  5. To list movies (not yet available)'
+    puts '  6. To list all items'
     puts '  0. Back to App menu'
     print 'List Items >> '
+  end
+
+  def create_item_options
+    puts 'Select choice'
+    puts '  1. To create game'
+    puts '  2. To create book'
+    puts '  3. To create Movie (not yet available)'
+    puts '  4. To create Music Album (not yet available)'
+    puts '  0. Back to App menu'
+    print 'Add Items >> '
   end
   # you can add your required def here
 end
