@@ -2,7 +2,7 @@
 
 require_relative 'Classes/app'
 
-EXIT_MESSAGE = "\n\nThank you for using this app\n\n".freeze
+EXIT_MESSAGE = "\nThank you for using this app\n\n".freeze
 
 app = App.new
 

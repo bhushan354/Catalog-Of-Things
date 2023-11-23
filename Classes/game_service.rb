@@ -10,7 +10,7 @@ class GameService
     @items = items
     @games = []
 
-    load
+    read_from_local_storage
   end
 
   def create_game
@@ -31,7 +31,7 @@ class GameService
                         publish_date: Date.parse(publish_date) || Date.today, author: author)
         @items << game
         @games << game
-        save
+        save_to_local_storage
         puts 'Game added successfully!'
         break
       end
@@ -54,7 +54,7 @@ class GameService
     end
   end
 
-  def save
+  def save_to_local_storage
     FileUtils.mkdir_p(DATA_DIR) unless File.directory?(DATA_DIR)
 
     File.open(File.join(DATA_DIR, 'games.json'), 'w') do |file|
@@ -71,7 +71,7 @@ class GameService
     end
   end
 
-  def load
+  def read_from_local_storage
     return [] unless File.exist?(File.join(DATA_DIR, 'games.json'))
 
     begin
