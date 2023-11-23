@@ -16,7 +16,6 @@ class App
 
     @all_things = []
 
-    # All subclass of item class (Book, MusicAlbum, Movie, and Game) should be push here
     @items = []
 
     @author_manager = AuthorService.new
@@ -42,13 +41,17 @@ class App
     puts 'Book Created Successfully'
   end
 
-  def display_books
-    @books = read_from_file('./dataJSON/books.json')
-    puts 'Book list is empty' if @books.empty?
-    @books.each_with_index do |book, i|
-      puts "#{i}) Publisher: #{book.publisher}, " \
-           "Cover state: #{book.cover_state}, " \
-           "Publish date: #{book.publish_date}"
+  def list_books
+    if @books.empty?
+      puts "Book is empty\n\n"
+    else
+      puts "\nList of Books:"
+
+      @books.each_with_index do |item, i|
+        print "  #{i} | Publisher: #{item.publisher} - Cover_state: #{item.cover_state} "
+        puts "- publish_date: #{item.publish_date} id: #{item.id}"
+      end
+      puts ''
     end
   end
 
@@ -93,6 +96,7 @@ class App
       puts "Item is empty\n\n"
     else
       puts "\nList of Items:"
+
       @items.each_with_index do |item, i|
         author_first_name = item&.author ? " Author: \"#{item.author.first_name} #{item.author.last_name}\" " : nil
         puts "  #{i} | [#{item.class.name}] -#{author_first_name}Publish Date: #{item.publish_date}. id: #{item.id}"
@@ -142,7 +146,7 @@ class App
       when 3
         puts "Music-Album listing functionality is not yet implemented.\n\n"
       when 4
-        display_books
+        list_books
       when 5
         list_items
       else
