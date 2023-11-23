@@ -1,5 +1,3 @@
-#!/usr/bin/ruby -w
-
 require_relative 'Classes/app'
 
 EXIT_MESSAGE = "\nThank you for using this app\n\n".freeze
