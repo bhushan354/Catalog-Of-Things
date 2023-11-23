@@ -118,8 +118,6 @@ class App
       when 2
         create_book
       when 3
-        puts "Creating Movie functionality is not yet implemented.\n\n"
-      when 4
         puts "Creating Music functionality is not yet implemented.\n\n"
       when 0
         break
@@ -131,10 +129,10 @@ class App
 
   def list_items_menu
     loop do
-      list_menu_option_display
-
-      choice = gets.chomp.to_i
+      choice = list_menu_option_display
       puts "\n"
+
+      break if choice.zero?
 
       case choice
       when 1
@@ -146,11 +144,7 @@ class App
       when 4
         puts "Book listing functionality is not yet implemented.\n\n"
       when 5
-        puts "Movies listing functionality is not yet implemented.\n\n"
-      when 6
         list_items
-      when 0
-        break
       else
         puts 'Invalid choice. Please try again.'
       end
@@ -169,18 +163,17 @@ class App
     puts '  2. To Music Album (not yet available)'
     puts '  3. To list Music-Album (not yet available)'
     puts '  4. To list books'
-    puts '  5. To list movies (not yet available)'
-    puts '  6. To list all items'
+    puts '  5. To list all items'
     puts '  0. Back to App menu'
     print 'List Items >> '
+    gets.chomp.to_i
   end
 
   def create_item_options
     puts 'Select choice'
     puts '  1. To create game'
     puts '  2. To create book'
-    puts '  3. To create Movie (not yet available)'
-    puts '  4. To create Music Album (not yet available)'
+    puts '  3. To create Music Album (not yet available)'
     puts '  0. Back to App menu'
     print 'Add Items >> '
   end
