@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby
+
 require_relative 'Classes/app'
 
 EXIT_MESSAGE = "\nThank you for using this app\n\n".freeze
