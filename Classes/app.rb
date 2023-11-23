@@ -4,8 +4,9 @@ require_relative 'author'
 require 'json'
 require 'date'
 require_relative 'game'
-require_relative 'author_app'
+require_relative 'author_service'
 require_relative 'utils/util'
+require_relative 'game_service'
 
 class App
   def initialize
@@ -15,10 +16,10 @@ class App
 
     @all_things = []
 
-    # All subclass of item class (Book, MusicAlbum, Movie, and Game) should be push here
     @items = []
 
-    @author_manager = AuthorApp.new
+    @author_manager = AuthorService.new
+    @game_creator = GameService.new(@author_manager, @items)
   end
 
   def create_book
@@ -40,13 +41,17 @@ class App
     puts 'Book Created Successfully'
   end
 
-  def display_books
-    @books = read_from_file('./dataJSON/books.json')
-    puts 'Book list is empty' if @books.empty?
-    @books.each_with_index do |book, i|
-      puts "#{i}) Publisher: #{book.publisher}, " \
-           "Cover state: #{book.cover_state}, " \
-           "Publish date: #{book.publish_date}"
+  def list_books
+    if @books.empty?
+      puts "Book is empty\n\n"
+    else
+      puts "\nList of Books:"
+
+      @books.each_with_index do |item, i|
+        print "  #{i} | Publisher: #{item.publisher} - Cover_state: #{item.cover_state} "
+        puts "- publish_date: #{item.publish_date} id: #{item.id}"
+      end
+      puts ''
     end
   end
 
@@ -91,8 +96,9 @@ class App
       puts "Item is empty\n\n"
     else
       puts "\nList of Items:"
+
       @items.each_with_index do |item, i|
-        author_first_name = item.author ? " Author: \"#{item.author.first_name} #{item.author.last_name}\" " : nil
+        author_first_name = item&.author ? " Author: \"#{item.author.first_name} #{item.author.last_name}\" " : nil
         puts "  #{i} | [#{item.class.name}] -#{author_first_name}Publish Date: #{item.publish_date}. id: #{item.id}"
       end
       puts ''
@@ -105,12 +111,8 @@ class App
 
   def create_item
     loop do
-      puts 'Select choice'
-      puts '  1. To create game'
-      puts '  2. To create book'
-      puts '  3. To create label'
-      puts '  0. Back to menu'
-      print 'Add Items >> '
+      create_item_options
+
       choice = gets.chomp.to_i
       puts "\n"
 
@@ -120,7 +122,7 @@ class App
       when 2
         create_book
       when 3
-        create_label
+        puts "Creating Music functionality is not yet implemented.\n\n"
       when 0
         break
       else
@@ -129,31 +131,55 @@ class App
     end
   end
 
-  def create_game
-    return unless @author_manager.check_and_create_author
-
-    publish_date = get_date_input('Publish date')
-    last_played_at = get_date_input('Last played date')
-    multiplayer = get_boolean_input('Is it multiplayer?')
-
+  def list_items_menu
     loop do
-      list_authors
+      choice = list_menu_option_display
+      puts "\n"
 
-      author_id = get_non_empty_input('Select Author by ID listed above').to_i
-      author = @author_manager.authors.find { |i| i.id == author_id }
+      break if choice.zero?
 
-      if author.nil?
-        puts 'Invalid author ID. Please choose a correct author ID listed above or enter "exit" to go back to the Menu.'
-        break if get_non_empty_input('Enter your choice: ').downcase == 'exit'
+      case choice
+      when 1
+        @game_creator.list
+      when 2
+        puts "Music listing functionality is not yet implemented.\n\n"
+      when 3
+        puts "Music-Album listing functionality is not yet implemented.\n\n"
+      when 4
+        list_books
+      when 5
+        list_items
       else
-        game = Game.new(last_played_at: last_played_at, multiplayer: multiplayer,
-                        publish_date: publish_date || Date.today)
-        game.author = author
-        @items << game
-        puts 'Game added successfully!'
-        break
+        puts 'Invalid choice. Please try again.'
       end
     end
+  end
+
+  def create_game
+    @game_creator.create_game
+  end
+
+  private
+
+  def list_menu_option_display
+    puts 'Select choice'
+    puts '  1. To list games'
+    puts '  2. To Music Album (not yet available)'
+    puts '  3. To list Music-Album (not yet available)'
+    puts '  4. To list books'
+    puts '  5. To list all items'
+    puts '  0. Back to App menu'
+    print 'List Items >> '
+    gets.chomp.to_i
+  end
+
+  def create_item_options
+    puts 'Select choice'
+    puts '  1. To create game'
+    puts '  2. To create book'
+    puts '  3. To create Music Album (not yet available)'
+    puts '  0. Back to App menu'
+    print 'Add Items >> '
   end
   # you can add your required def here
 end

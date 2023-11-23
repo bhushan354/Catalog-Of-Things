@@ -1,8 +1,8 @@
-#!/usr/bin/ruby -w
+#!/usr/bin/env ruby
 
 require_relative 'Classes/app'
 
-EXIT_MESSAGE = "\n\nThank you for using this app\n\n".freeze
+EXIT_MESSAGE = "\nThank you for using this app\n\n".freeze
 
 app = App.new
 
@@ -12,6 +12,7 @@ loop do
   puts '2. List Items'
   puts '3. Create Items'
   puts '4. Create Author'
+  puts '5. Create Label'
   puts '0. Quit'
 
   print '>> '
@@ -22,11 +23,13 @@ loop do
   when '1'
     app.list_authors
   when '2'
-    app.list_items
+    app.list_items_menu
   when '3'
     app.create_item
   when '4'
     app.create_author
+  when '5'
+    app.create_label
   when '0'
     puts EXIT_MESSAGE
     break

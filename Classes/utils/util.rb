@@ -1,3 +1,5 @@
+require 'date'
+
 def get_non_empty_input(prompt)
   input = nil
   loop do
@@ -16,14 +18,18 @@ def get_date_input(prompt)
     input = gets.chomp.strip
 
     case
-    when /^\d{4}-\d{2}-\d{2}$/.match?(input)
-      return input
     when input.casecmp('now').zero? || input.casecmp('today').zero?
       return Date.today
     when input.empty? || input.casecmp('nil').zero? || input.casecmp('null').zero?
       return nil
     else
-      puts 'Invalid date format. Please enter a date in the format YYYY-MM-DD.'
+      begin
+        parsed_date = Date.parse(input)
+        return parsed_date.strftime('%Y-%m-%d')
+      rescue ArgumentError
+        puts 'Invalid date format. Please enter a valid date in the format YYYY-MM-DD.'
+        puts 'Or insert "now" or "today" to insert the current date.'
+      end
     end
   end
 end
