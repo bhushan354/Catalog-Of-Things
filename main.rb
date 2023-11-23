@@ -4,14 +4,12 @@ class Menu
   def display_option
     puts 'Please choose an option by typing a number:'
     puts '1 - List books'
-    puts '2 - List movies'
-    puts '3 - List music albums'
-    puts '4 - List games'
-    puts '5 - Create book'
-    puts '6 - Create movie'
-    puts '7 - Create music album'
-    puts '8 - Create game'
-    puts '9 - EXIT TERMINAL APP'
+    puts '2 - List music albums'
+    puts '3 - List games'
+    puts '4 - Create book'
+    puts '5 - Create music album'
+    puts '6 - Create game'
+    puts '7 - EXIT TERMINAL APP'
   end
 
   def choice
@@ -38,12 +36,12 @@ class Main
       # eg 3)display_option_games for the sake of this file to run in terminal you can edit the names of your method
       when '1' then @app.display_option_books
 
-      when '2' then @app.display_option_musicAlbums
+      when '2' then @app.list_all_music_albums
       when '3' then @app.display_option_games
 
       when '4' then @app.create_book
 
-      when '5' then @app.create_musicAlbum
+      when '5' then @app.create_music_album
       when '6' then @app.create_game
       when '7' then break
       else
