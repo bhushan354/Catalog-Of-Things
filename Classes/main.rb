@@ -1,4 +1,5 @@
-require_relative 'classes/app'
+# main.rb
+require_relative 'app'
 
 class Menu
   def display_option
@@ -34,7 +35,10 @@ class Main
       # hello teammates as this is group task this 1)display_option_books and 4)create_book these are my methods
       # and I have given random method name to your methods
       # eg 3)display_option_games for the sake of this file to run in terminal you can edit the names of your method
-      when '1' then @app.display_option_books
+      when '1' then @app.display_books
+      # when '2' then @app.display_labels
+      # when '3' then @app.create_book
+      # when '4' then @app.create_label
 
       when '2' then @app.list_all_music_albums
       when '3' then @app.display_option_games
@@ -42,6 +46,7 @@ class Main
       when '4' then @app.create_book
 
       when '5' then @app.create_music_album
+      # when '5' then @app.display_option_games
       when '6' then @app.create_game
       when '7' then break
       else
