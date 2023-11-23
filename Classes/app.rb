@@ -7,6 +7,7 @@ require_relative 'game'
 require_relative 'author_service'
 require_relative 'utils/util'
 require_relative 'game_service'
+require_relative 'music_album_service'
 
 class App
   def initialize
@@ -17,7 +18,7 @@ class App
     @all_things = []
 
     @items = []
-
+    @music_album_creator = MusicAlbumService.new
     @author_manager = AuthorService.new
     @game_creator = GameService.new(@author_manager, @items)
   end
@@ -122,7 +123,7 @@ class App
       when 2
         create_book
       when 3
-        puts "Creating Music functionality is not yet implemented.\n\n"
+        "Creating Music functionality is not yet implemented.\n\n"
       when 0
         break
       else
@@ -157,6 +158,14 @@ class App
 
   def create_game
     @game_creator.create_game
+  end
+
+  def create_music_album
+    @music_album_creator.create_music_album
+  end
+
+  def list_all_music_albums
+    @music_album_creator.list_all_music_albums
   end
 
   private
