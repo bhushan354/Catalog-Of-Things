@@ -8,6 +8,7 @@ require_relative 'author_app'
 require_relative 'utils/util'
 require_relative 'music_album'
 
+# rubocop:disable Metrics/ClassLength
 class App
   def initialize
     @books = []
@@ -104,6 +105,7 @@ class App
     @author_manager.create_author
   end
 
+  # rubocop:disable Metrics/MethodLength
   def create_item
     loop do
       puts 'Select choice'
@@ -129,6 +131,7 @@ class App
       end
     end
   end
+  # rubocop:enable Metrics/MethodLength
 
   def create_game
     return unless @author_manager.check_and_create_author
@@ -204,3 +207,4 @@ class App
     end
   end
 end
+# rubocop:enable Metrics/ClassLength
