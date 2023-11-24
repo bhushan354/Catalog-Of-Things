@@ -1,25 +1,27 @@
-# music_album.rb
 require 'date'
 require_relative 'item'
 
 class MusicAlbum < Item
   attr_accessor :on_spotify
+  attr_reader :id, :genre
 
-  def initialize(label: nil, author: nil, on_spotify: true, publish_date: Date.today, id: Random.rand(1..1000))
+  def initialize(publish_date = Date.today, id = Random.rand(1..1000), genre: nil, on_spotify: false)
     raise ArgumentError, 'on_spotify must be either true or false' unless [true, false].include?(on_spotify)
-    raise ArgumentError, 'publish_date must be a Date object' unless publish_date.is_a?(Date)
 
     super(id, publish_date)
-
     @on_spotify = on_spotify
-    @label = label
-    @author = author
+    return unless genre
 
-    validate_on_spotify
+    @genre = genre
+    genre.items << self
   end
 
   def can_be_archived?
     super && @on_spotify
+  end
+
+  def genre=(new_genre)
+    new_genre.items << self if new_genre && !new_genre.items.include?(self)
   end
 
   private
