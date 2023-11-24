@@ -6,28 +6,29 @@ require 'date'
 require_relative 'game'
 require_relative 'author_service'
 require_relative 'utils/util'
+require_relative 'utils/unix_text.color'
 require_relative 'game_service'
 require_relative 'music_album_service'
+require_relative 'label_service'
 
 def list_menu_option_display
-  puts 'Select choice'
+  puts "\nSelect choice"
   puts '  1. To list games'
-  puts '  2. To Music Album (not yet available)'
-  puts '  3. To list Music-Album (not yet available)'
-  puts '  4. To list books'
-  puts '  5. To list all items'
+  puts '  2. To MusicAlbum (not yet available)'
+  puts '  3. To list books'
+  puts '  4. To list all items'
   puts '  0. Back to App menu'
-  print 'List Items >> '
+  print "#{GREEN_COLOR}List Items >>#{END_COLOR} "
   gets.chomp.to_i
 end
 
 def create_item_options
-  puts 'Select choice'
+  puts "\nSelect choice"
   puts '  1. To create game'
   puts '  2. To create book'
   puts '  3. To create Music Album (not yet available)'
   puts '  0. Back to App menu'
-  print 'Add Items >> '
+  print "#{GREEN_COLOR}Add Items >>#{END_COLOR} "
 end
 
 class App
@@ -36,11 +37,10 @@ class App
     @labels = []
     @authors = []
 
-    @all_things = []
-
     @items = []
     @music_album_creator = MusicAlbumService.new
     @author_manager = AuthorService.new
+    @label_manager = LabelService.new
     @game_creator = GameService.new(@author_manager, @items)
   end
 
@@ -58,8 +58,6 @@ class App
     @books << book
     instance_author.add_item(book)
     @authors << instance_author
-    write_to_file(@authors, './dataJSON/authors.json')
-    write_to_file(@books, './dataJSON/books.json')
     puts 'Book Created Successfully'
   end
 
@@ -78,22 +76,11 @@ class App
   end
 
   def create_label
-    title = get_non_empty_input('Title')
-
-    color = get_non_empty_input('Color')
-    label = Label.new(title, color)
-    @labels << label
-    @items << label
-    write_to_file(@labels, './dataJSON/labels.json')
-    puts 'Label Created Successfully'
+    @label_manager.create_label
   end
 
   def display_labels
-    @labels = read_from_file('./dataJSON/labels.json')
-    puts 'Label list is empty' if @labels.empty?
-    @labels.each_with_index do |label, i|
-      puts "#{i}) Title: #{label.title}, Color: #{label.color}"
-    end
+    @label_manager.display_labels
   end
 
   def write_to_file(data, file_path)
@@ -144,7 +131,7 @@ class App
       when 2
         create_book
       when 3
-        "Creating Music functionality is not yet implemented.\n\n"
+        "Creating MusicAlbum functionality is not yet implemented.\n"
       when 0
         break
       else
@@ -164,12 +151,10 @@ class App
       when 1
         @game_creator.list
       when 2
-        puts "Music listing functionality is not yet implemented.\n\n"
+        puts "MusicAlbum listing functionality is not yet implemented.\n"
       when 3
-        puts "Music-Album listing functionality is not yet implemented.\n\n"
-      when 4
         list_books
-      when 5
+      when 4
         list_items
       else
         puts 'Invalid choice. Please try again.'

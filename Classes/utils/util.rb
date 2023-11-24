@@ -1,9 +1,10 @@
 require 'date'
+require_relative 'unix_text.color'
 
 def get_non_empty_input(prompt)
   input = nil
   loop do
-    print "#{prompt}: "
+    print "#{GREEN_COLOR}#{prompt}:#{END_COLOR} "
     input = gets.chomp.strip
     break unless input.empty?
 
@@ -14,7 +15,7 @@ end
 
 def get_date_input(prompt)
   loop do
-    print "#{prompt} (YYYY-MM-DD): "
+    print "#{GREEN_COLOR}#{prompt} (YYYY-MM-DD):#{END_COLOR} "
     input = gets.chomp.strip
 
     case
@@ -36,7 +37,7 @@ end
 
 def get_boolean_input(prompt)
   loop do
-    print "#{prompt} (Y/N): "
+    print "#{GREEN_COLOR}#{prompt} (Y/N):#{END_COLOR} "
     input = gets.chomp.strip.downcase
 
     case input
