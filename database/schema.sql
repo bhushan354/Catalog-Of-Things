@@ -28,3 +28,16 @@ CREATE TABLE Labels (
     title VARCHAR(255),
     color VARCHAR(255)
 );
+
+CREATE TABLE genres (
+    id  SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE music_albums (
+    id  SERIAL PRIMARY KEY,
+    on_spotify BOOLEAN NOT NULL,
+    publish_date DATE NOT NULL,
+    genre_id INT,
+    FOREIGN KEY (genre_id) REFERENCES genres(id)
+);
