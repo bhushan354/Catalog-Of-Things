@@ -26,6 +26,7 @@ class LabelService
     if @labels.empty?
       puts "Label is empty\n\n"
     else
+      puts "\n"
       @labels.each_with_index do |label, i|
         puts "#{i}) Title: #{label.title}, Color: #{label.color}"
       end
@@ -42,7 +43,8 @@ class LabelService
       label_data = @labels.map do |label|
         {
           title: label.title,
-          color: label.color
+          color: label.color,
+          id: label.id
         }
       end
       file.puts(JSON.generate(label_data))
@@ -56,7 +58,7 @@ class LabelService
     label_data = JSON.parse(json_data)
 
     label_data.each do |label|
-      @labels << Label.new(label['title'], label['color'])
+      @labels << Label.new(label['title'], label['color'], label['id'])
     end
   end
 end
