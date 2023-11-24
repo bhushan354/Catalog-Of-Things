@@ -9,7 +9,7 @@ class Book < Item
     @cover_state = cover_state
     publish_date_parse = publish_date ? Date.parse(publish_date.to_s) : Date.today
     super(id, publish_date_parse)
-  end  
+  end
 
   def can_be_archived?
     super || cover_state.downcase == 'bad'

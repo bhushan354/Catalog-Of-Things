@@ -38,7 +38,7 @@ describe LabelService do
 
   describe '#initialize' do
     it 'creates a LabelService instance with an empty array of labels' do
-      allow(File).to receive(:exist?).and_return(false)  # Stub file existence check
+      allow(File).to receive(:exist?).and_return(false) # Stub file existence check
       label_service = LabelService.new
       expect(label_service.labels).to be_empty
     end
