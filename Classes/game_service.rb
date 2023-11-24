@@ -27,8 +27,8 @@ class GameService
       author = author_manager.authors.find { |a| a.id == author_id }
 
       if author
-        game = Game.new(last_played_at: Date.parse(last_played_at), multiplayer: multiplayer,
-                        publish_date: Date.parse(publish_date) || Date.today, author: author)
+        game = Game.new(last_played_at: last_played_at, multiplayer: multiplayer,
+                        publish_date: publish_date || Date.today, author: author)
         @items << game
         @games << game
         save_to_local_storage
