@@ -10,6 +10,7 @@ require_relative 'utils/unix_text.color'
 require_relative 'game_service'
 require_relative 'music_album_service'
 require_relative 'label_service'
+require_relative 'book_service'
 
 def list_menu_option_display
   puts "\nSelect choice"
@@ -41,38 +42,17 @@ class App
     @music_album_creator = MusicAlbumService.new
     @author_manager = AuthorService.new
     @label_manager = LabelService.new
+
     @game_creator = GameService.new(@author_manager, @items)
+    @book_creator = BookService.new(@items)
   end
 
   def create_book
-    date = get_date_input('Publishing date')
-
-    first_name = get_non_empty_input('Publisher First Name')
-    last_name = get_non_empty_input('Publisher Last Name')
-    instance_author = Author.new(first_name, last_name)
-    publisher = "#{first_name} #{last_name}"
-    cover = get_non_empty_input('Cover state')
-
-    book = Book.new(publisher, cover, date)
-    @items << book
-    @books << book
-    instance_author.add_item(book)
-    @authors << instance_author
-    puts 'Book Created Successfully'
+    @book_creator.create_book
   end
 
   def list_books
-    if @books.empty?
-      puts "Book is empty\n\n"
-    else
-      puts "\nList of Books:"
-
-      @books.each_with_index do |item, i|
-        print "  #{i} | Publisher: #{item.publisher} - Cover_state: #{item.cover_state} "
-        puts "- publish_date: #{item.publish_date} id: #{item.id}"
-      end
-      puts ''
-    end
+    @book_creator.list_books
   end
 
   def create_label
@@ -81,19 +61,6 @@ class App
 
   def display_labels
     @label_manager.display_labels
-  end
-
-  def write_to_file(data, file_path)
-    File.open(file_path, 'w') do |file|
-      file.puts(JSON.generate(data))
-    end
-    puts "File written successfully to #{file_path}"
-  rescue StandardError => e
-    puts "Error writing to file #{file_path}: #{e.message}"
-  end
-
-  def read_from_file(file_path)
-    JSON.parse(File.read(file_path))
   end
 
   def list_authors
@@ -107,7 +74,7 @@ class App
       puts "\nList of Items:"
 
       @items.each_with_index do |item, i|
-        author_first_name = item&.author ? " Author: \"#{item.author.first_name} #{item.author.last_name}\" " : nil
+        author_first_name = item&.author ? "Author: \"#{item.author.first_name} #{item.author.last_name}\" " : nil
         puts "  #{i} | [#{item.class.name}] -#{author_first_name}Publish Date: #{item.publish_date}. id: #{item.id}"
       end
       puts ''
