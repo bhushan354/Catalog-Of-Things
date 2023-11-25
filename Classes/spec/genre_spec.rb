@@ -1,7 +1,5 @@
-genre_spec.rb
-
-require_relative '../Classes/item'
-require_relative '../Classes/genre'
+require_relative '../item'
+require_relative '../genre'
 
 describe Genre do
   describe '#initialize' do
