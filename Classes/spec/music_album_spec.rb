@@ -9,7 +9,9 @@ RSpec.describe MusicAlbum do
 
   describe '#initialize' do
     it 'raises an error for invalid on_spotify value' do
-      expect { MusicAlbum.new(on_spotify: 'invalid') }.to raise_error(ArgumentError, 'on_spotify must be either true or false')
+      expect do
+        MusicAlbum.new(on_spotify: 'invalid')
+      end.to raise_error(ArgumentError, 'on_spotify must be either true or false')
     end
   end
 
