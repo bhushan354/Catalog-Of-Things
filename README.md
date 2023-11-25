@@ -43,10 +43,11 @@
 
 ### Key Features <a name="key-features"></a>
 
-- **Built using Ruby**
-- **Person, student and teacher classes**
-- **Decorator design pattern**
-- **Associations**
+- 🔰 **[ Built using Ruby ]**
+- 🔰 **[ Add new book ]**
+- 🔰 **[ Add new games ]**
+- 🔰 **[ Add new music albums ]**
+- 🔰 **[ List all items added ]**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -114,9 +115,7 @@ it will install the required gemfile for running the project
 
 ## 🔭 Future Features <a name="future-features"></a>
 
-- **Add Database to store recent message**
-- **Add Account System**
-- **Add UML diag**
+- [ ] **[ Link the app to the database ]**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
