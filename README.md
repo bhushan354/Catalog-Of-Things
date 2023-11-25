@@ -53,7 +53,8 @@
 
 ## 🚀 Live Demo <a name="live-demo"></a>
 
-- [Video Presentation Link]([https://drive.google.com/file/d/1noJ-pbOyZiU55nUKWI60p0Q04G99HHml/view?usp=sharing](https://drive.google.com/file/d/1_ycRoBiiUnHsbJzg3utoY4HIcRGCH92d/view?usp=drive_link))
+- [Video Presentation Link]
+- https://drive.google.com/file/d/1_ycRoBiiUnHsbJzg3utoY4HIcRGCH92d/view?usp=drive_link
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
