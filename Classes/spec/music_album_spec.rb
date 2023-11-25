@@ -1,68 +1,38 @@
-# spec/music_album_spec.rb
-require 'date'
-require_relative '../item'
 require_relative '../music_album'
+require_relative '../genre'
+require 'rspec'
 
 describe MusicAlbum do
+  let(:publish_date) { Date.today }
+  let(:id) { Random.rand(1..1000) }
+  let(:genre) { Genre.new('Pop') }
+
+  subject(:album) { MusicAlbum.new(publish_date, id, genre: genre, on_spotify: true) }
+
   describe '#initialize' do
-    context 'with valid parameters' do
-      it 'creates a MusicAlbum instance' do
-        album = MusicAlbum.new(label: 'Album 1', author: 'Artist 1')
-        expect(album).to be_a(MusicAlbum)
-      end
+    it 'initializes a music album with a publish date, id, genre, and on_spotify flag' do
+      expect(album.publish_date).to eq(publish_date)
+      expect(album.id).to eq(id)
+      expect(album.genre).to eq(genre)
+      expect(album.on_spotify).to be_truthy
+    end
 
-      it 'sets the on_spotify attribute' do
-        album = MusicAlbum.new(label: 'Album 1', author: 'Artist 1', on_spotify: false)
-        expect(album.on_spotify).to eq(false)
-      end
-
-      it 'raises an error if on_spotify is not a boolean' do
-        expect do
-          MusicAlbum.new(label: 'Album 1', author: 'Artist 1', on_spotify: 'invalid')
-        end.to raise_error(ArgumentError)
-      end
-
-      it 'raises an error if publish_date is not a Date object' do
-        expect do
-          MusicAlbum.new(label: 'Album 1', author: 'Artist 1', publish_date: 'invalid')
-        end.to raise_error(ArgumentError)
-      end
+    it 'raises an error if the on_spotify flag is not true or false' do
+      expect { MusicAlbum.new(on_spotify: 'invalid_value') }.to raise_error(ArgumentError)
     end
   end
 
   describe '#can_be_archived?' do
-    context 'when the album can be archived' do
-      it 'returns true' do
-        album = MusicAlbum.new(label: 'Album 1', author: 'Artist 1')
-        expect(album.can_be_archived?).to eq(true)
-      end
-    end
-
-    context 'when the album cannot be archived' do
-      it 'returns false if on_spotify is false' do
-        album = MusicAlbum.new(label: 'Album 1', author: 'Artist 1', on_spotify: false)
-        expect(album.can_be_archived?).to eq(false)
-      end
-
-      it 'returns false if the parent class cannot be archived' do
-        allow_any_instance_of(Item).to receive(:can_be_archived?).and_return(false)
-        album = MusicAlbum.new(label: 'Album 1', author: 'Artist 1')
-        expect(album.can_be_archived?).to eq(false)
-      end
+    it 'returns false if the album is not on Spotify' do
+      album = MusicAlbum.new(publish_date, id, genre: genre)
+      expect(album.can_be_archived?).to be_falsy
     end
   end
 
-  describe 'private methods' do
-    describe '#validate_on_spotify' do
-      it 'outputs a warning if on_spotify is false' do
-        album = MusicAlbum.new(label: 'Album 1', author: 'Artist 1', on_spotify: false)
-        expect { album.send(:validate_on_spotify) }.to output("Warning: Album is not on Spotify\n").to_stdout
-      end
-
-      it 'does not output a warning if on_spotify is true' do
-        album = MusicAlbum.new(label: 'Album 1', author: 'Artist 1', on_spotify: true)
-        expect { album.send(:validate_on_spotify) }.to_not output.to_stdout
-      end
+  describe '#genre=' do
+    it 'does nothing if the new genre is the same as the old genre' do
+      album.genre = genre
+      expect(album.genre).to eq(genre)
     end
   end
 end

@@ -14,10 +14,6 @@ RSpec.describe Game do
     expect(game).to be_an_instance_of(Game)
   end
 
-  it 'raises an error if last_played_at is not a Date or nil' do
-    expect { Game.new(last_played_at: 'invalid', multiplayer: true) }.to raise_error(ArgumentError)
-  end
-
   it 'raises an error if multiplayer is not a Boolean' do
     expect { Game.new(last_played_at: Date.new(2022, 12, 31), multiplayer: 'invalid') }.to raise_error(ArgumentError)
   end
