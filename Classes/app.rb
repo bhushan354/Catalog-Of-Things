@@ -11,11 +11,12 @@ require_relative 'game_service'
 require_relative 'music_album_service'
 require_relative 'label_service'
 require_relative 'book_service'
+require_relative 'genre_service'
 
 def list_menu_option_display
   puts "\nSelect choice"
   puts '  1. To list games'
-  puts '  2. To MusicAlbum (not yet available)'
+  puts '  2. To MusicAlbum'
   puts '  3. To list books'
   puts '  4. To list all items'
   puts '  0. Back to App menu'
@@ -27,7 +28,7 @@ def create_item_options
   puts "\nSelect choice"
   puts '  1. To create game'
   puts '  2. To create book'
-  puts '  3. To create Music Album (not yet available)'
+  puts '  3. To create Music Album'
   puts '  0. Back to App menu'
   print "#{GREEN_COLOR}Add Items >>#{END_COLOR} "
 end
@@ -39,10 +40,11 @@ class App
     @authors = []
 
     @items = []
-    @music_album_creator = MusicAlbumService.new
+    @genre_manager = GenreService.new
     @author_manager = AuthorService.new
     @label_manager = LabelService.new
 
+    @music_album_creator = MusicAlbumService.new(@genre_manager, @items)
     @game_creator = GameService.new(@author_manager, @items)
     @book_creator = BookService.new(@items)
   end
@@ -98,7 +100,7 @@ class App
       when 2
         create_book
       when 3
-        "Creating MusicAlbum functionality is not yet implemented.\n"
+        create_music_album
       when 0
         break
       else
@@ -118,7 +120,7 @@ class App
       when 1
         @game_creator.list
       when 2
-        puts "MusicAlbum listing functionality is not yet implemented.\n"
+        list_all_music_albums
       when 3
         list_books
       when 4
@@ -127,6 +129,14 @@ class App
         puts 'Invalid choice. Please try again.'
       end
     end
+  end
+
+  def list_genres
+    @genre_manager.list_genres
+  end
+
+  def create_genre
+    @genre_manager.create_genre
   end
 
   def create_game
@@ -138,8 +148,6 @@ class App
   end
 
   def list_all_music_albums
-    @music_album_creator.list_all_music_albums
+    @music_album_creator.list
   end
-
-  # you can add your required def here
 end

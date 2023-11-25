@@ -21,7 +21,7 @@ class AuthorService
 
     save_to_local_storage
 
-    puts "Author #{author.first_name}#{author.id} created successfully!"
+    puts "Author: \"#{author.first_name}(#{author.id})\" created successfully!\n\n"
     author
   end
 
