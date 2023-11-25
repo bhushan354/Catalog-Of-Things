@@ -9,10 +9,11 @@
 
 ## 📗 Table of Contents
 
-- [📖 Ruby-Group-Capstone ](#-Ruby-Group-Capstone-)
+- [📖Ruby-Group-Capstone ](#ruby-group-capstone-)
   - [🛠 Built With ](#-built-with-)
     - [Tech Stack ](#tech-stack-)
     - [Key Features ](#key-features-)
+  - [🚀 Live Demo ](#-live-demo-)
   - [💻 Getting Started ](#-getting-started-)
     - [Prerequisites](#prerequisites)
     - [Setup](#setup)
@@ -43,11 +44,10 @@
 
 ### Key Features <a name="key-features"></a>
 
-- 🔰 **[ Built using Ruby ]**
-- 🔰 **[ Add new book ]**
-- 🔰 **[ Add new games ]**
-- 🔰 **[ Add new music albums ]**
-- 🔰 **[ List all items added ]**
+- **Built using Ruby**
+- **Person, student and teacher classes**
+- **Decorator design pattern**
+- **Associations**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -79,6 +79,9 @@ Clone this repository to your desired folder:
 ```bash
   git clone https://github.com/bhushan354/Ruby-Group-Capstone.git
 ```
+```sh
+  cd Ruby-Group-Capstone
+```
 
 ### Install
 
@@ -91,7 +94,9 @@ Install this project with:
 
 it will install the required gemfile for running the project
 
-<!-- ### Usage -->
+```sh
+  ruby main.rb
+```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -109,13 +114,26 @@ it will install the required gemfile for running the project
 - GitHub: [@Ochiengsteven](https://github.com/Ochiengsteven)
 - LinkedIn: [LinkedIn](https://www.linkedin.com/in/steven-ochieng-a43125179/)
 
+👤 **Stanley Osagie Ramos**
+
+- GitHub: [@sagieramos](https://github.com/sagieramos)
+- Twitter: [@sagieramos](https://twitter.com/sagieramos)
+- LinkedIn: [LinkedIn](https://linkedin.com/in/sagieramos)
+
+👤 **Stanley Osagie Ramos**
+- GitHub: [@sagieramos](https://github.com/sagieramos)
+- Twitter: [@sagieramos](https://twitter.com/sagieramos)
+- LinkedIn: [LinkedIn](https://linkedin.com/in/sagieramos)
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- FUTURE FEATURES -->
 
 ## 🔭 Future Features <a name="future-features"></a>
 
-- [ ] **[ Link the app to the database ]**
+- **Add Database to store recent message**
+- **Add Account System**
+- **Add UML diag**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -125,7 +143,7 @@ it will install the required gemfile for running the project
 
 Contributions, issues, and feature requests are welcome!
 
-Feel free to check the [issues page](https://github.com/Chimoneg27/School-Library/issues).
+Feel free to check the [issues page](https://github.com/Chimoneg27//Ruby-Group-Capstone/issues).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
