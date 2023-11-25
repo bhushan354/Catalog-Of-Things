@@ -120,11 +120,6 @@ it will install the required gemfile for running the project
 - Twitter: [@sagieramos](https://twitter.com/sagieramos)
 - LinkedIn: [LinkedIn](https://linkedin.com/in/sagieramos)
 
-👤 **Stanley Osagie Ramos**
-- GitHub: [@sagieramos](https://github.com/sagieramos)
-- Twitter: [@sagieramos](https://twitter.com/sagieramos)
-- LinkedIn: [LinkedIn](https://linkedin.com/in/sagieramos)
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- FUTURE FEATURES -->
