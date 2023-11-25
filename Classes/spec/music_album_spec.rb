@@ -25,23 +25,25 @@ RSpec.describe MusicAlbum do
     end
 
     it 'raises an error for invalid on_spotify value' do
-      expect { MusicAlbum.new(on_spotify: 'invalid') }.to raise_error(ArgumentError, 'on_spotify must be either true or false')
+      expect do
+        MusicAlbum.new(on_spotify: 'invalid')
+      end.to raise_error(ArgumentError, 'on_spotify must be either true or false')
     end
   end
 
   describe '#can_be_archived?' do
     it 'returns true if published over 10 years ago and on_spotify is true' do
-      album = MusicAlbum.new(today - 11 * 365, on_spotify: true)
+      album = MusicAlbum.new(today - (11 * 365), on_spotify: true)
       expect(album.can_be_archived?).to be_truthy
     end
 
     it 'returns false if published less than 10 years ago' do
-      album = MusicAlbum.new(today - 9 * 365, on_spotify: true)
+      album = MusicAlbum.new(today - (9 * 365), on_spotify: true)
       expect(album.can_be_archived?).to be_falsey
     end
 
     it 'returns false if not on_spotify' do
-      album = MusicAlbum.new(today - 11 * 365, on_spotify: false)
+      album = MusicAlbum.new(today - (11 * 365), on_spotify: false)
       expect(album.can_be_archived?).to be_falsey
     end
   end
