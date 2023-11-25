@@ -50,6 +50,13 @@
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+
+## 🚀 Live Demo <a name="live-demo"></a>
+
+- [Video Presentation Link]([https://drive.google.com/file/d/1noJ-pbOyZiU55nUKWI60p0Q04G99HHml/view?usp=sharing](https://drive.google.com/file/d/1_ycRoBiiUnHsbJzg3utoY4HIcRGCH92d/view?usp=drive_link))
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ## 💻 Getting Started <a name="getting-started"></a>
 
 To get a local copy up and running, follow these steps.
@@ -89,12 +96,6 @@ it will install the required gemfile for running the project
 <!-- AUTHORS -->
 
 ## 👥 Author <a name="author"></a>
-
-👤 **Garvin Chimone**
-
-- GitHub: [@Chimoneg27](https://github.com/Chimoneg27)
-- Twitter: [@GarvinChimone](https://twitter.com/GarvinChimone)
-- LinkedIn: [Garvin Chimone](https://www.linkedin.com/in/garvin-chimone-37208924a/)
 
 👤 **Bhushan Deshmukh**
 
