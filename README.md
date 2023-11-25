@@ -101,6 +101,10 @@ it will install the required gemfile for running the project
 - GitHub: [@bhushan354](https://github.com/bhushan354)
 - LinkedIn: [@bhushan354](https://www.linkedin.com/in/bhushan-deshmukh-5777851b1/)
 
+👤 **Ochieng Steven Otieno**
+
+- GitHub: [@Ochiengsteven](https://github.com/Ochiengsteven)
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/steven-ochieng-a43125179/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
